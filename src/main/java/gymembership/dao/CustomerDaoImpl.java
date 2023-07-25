@@ -23,5 +23,12 @@ public class CustomerDaoImpl implements ICustomerDao {
 	public List<Customer> findAll() {
 		return em.createQuery("from Customer").getResultList();
 	}
+
+	@Override
+	@Transactional
+	public void save(Customer customer) {
+		em.persist(customer);
+		
+	}
 }
 
