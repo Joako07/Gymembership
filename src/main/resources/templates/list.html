@@ -63,6 +63,7 @@
 				<th>membership</th>
 				-->
 				<th>editar</th>
+				<th>eliminar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -78,6 +79,8 @@
 				<td th:text="${customer.membership}"></td>
 				 -->
 				 <td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${customer.id}" th:text="'editar'"></a></td>
+				 <!-- Oneclick es codigo js, pregunto si quiere eliminar el cliente antes de eliminarlo -->
+				 <td><a class="btn btn-danger btn-xs"  th:href="@{/delete/} + ${customer.id}" th:text="'eliminar'" onclick="return confirm('¿Estás seguro que quieres eliminar este cliente?');"></a></td>
 			</tr>
 		</tbody>
 	</table>

@@ -72,4 +72,15 @@ public class CustomerController {
 		return "redirect:listar";
 	}
 	
+	//elimina cliente
+	@RequestMapping(value="/form/{id}")
+	public String delete(@PathVariable(value="id") Long id) {
+		
+		//Si el id existe lo elimina
+		if(id>0) {
+			customerDao.delete(id);
+		}
+		return "redirect:listar";
+	}
+	
 }

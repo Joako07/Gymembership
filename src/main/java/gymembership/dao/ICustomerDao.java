@@ -11,4 +11,6 @@ public interface ICustomerDao {
 	public void save(Customer customer);
 	
 	public Customer findOne(Long id);
+	
+    public void delete(Long id);
 }
