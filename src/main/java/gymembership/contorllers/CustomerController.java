@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import gymembership.dao.ICustomerDao;
 import gymembership.entities.Customer;
+import gymembership.service.ICustomerService;
 import jakarta.validation.Valid;
 
 @Controller
 public class CustomerController {
 	
 	@Autowired
-	private ICustomerDao customerDao;
+	private ICustomerService customerService;
 	
 	//obtener la lista de clientes
 	@GetMapping(value = "/list")
 	public String listar(Model model) {
 		model.addAttribute("title", "Lista de Clientes");
-		model.addAttribute("customers", customerDao.findAll());
+		model.addAttribute("customers", customerService.findAll());
 		return "list";
 	}
 	
@@ -47,7 +47,7 @@ public class CustomerController {
 		
 		//Si el id es mayor que cero lo busca en la DB, si no redirige a list
 		if(id>0) {
-			customer = customerDao.findOne(id);
+			customer = customerService.findOne(id);
 		}else {
 			return "redirect:/list";
 		}
@@ -68,7 +68,7 @@ public class CustomerController {
 			return "form";
 		}
 		
-		customerDao.save(customer);
+		customerService.save(customer);
 		return "redirect:listar";
 	}
 	
@@ -78,7 +78,7 @@ public class CustomerController {
 		
 		//Si el id existe lo elimina
 		if(id>0) {
-			customerDao.delete(id);
+			customerService.delete(id);
 		}
 		return "redirect:listar";
 	}

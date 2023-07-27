@@ -3,7 +3,6 @@ package gymembership.dao;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import gymembership.entities.Customer;
 import jakarta.persistence.EntityManager;
@@ -16,7 +15,6 @@ public class CustomerDaoImpl implements ICustomerDao {
 	private EntityManager em;
 
 	// Metodo para obtener la lista completa.
-	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked") // Hacemos que ignore las advertencias de eclipce
 	@Override
 	public List<Customer> findAll() {
@@ -25,14 +23,12 @@ public class CustomerDaoImpl implements ICustomerDao {
 	
 	//Busca por id
 	@Override
-	@Transactional(readOnly = true)
 	public Customer findOne(Long id) {
 		return em.find(Customer.class, id);
 	}
 	
 	//Guarda o edita un cliente
 	@Override
-	@Transactional
 	public void save(Customer customer) {
 		// Preguntamos si el id existe, es decir es distinto de nulo y si es mayor que
 		// cero.
@@ -47,7 +43,6 @@ public class CustomerDaoImpl implements ICustomerDao {
 
 	//Elimina un cliente
 	@Override
-	@Transactional
 	public void delete(Long id) {
 		em.remove(findOne(id));	
 	}
