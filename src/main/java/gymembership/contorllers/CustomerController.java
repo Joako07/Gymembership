@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import gymembership.entities.Customer;
 import gymembership.service.ICustomerService;
@@ -40,7 +41,7 @@ public class CustomerController {
 		}
 	
 	//Editar clientes. Le paso el id por la url y busco por el id en la db
-	@RequestMapping(value = "/form/{id}")
+	@RequestMapping(value = "/form/{id}",method = RequestMethod.GET)
 	public String edit(@PathVariable(value="id") Long id, Map<String, Object> model) {
 		
 		Customer customer = null;
@@ -53,7 +54,7 @@ public class CustomerController {
 		}
 		
 		model.put("customer", customer);
-		model.put("titulo", "Editar Cliente");
+		model.put("title", "Editar Cliente");
 		return "form";		
 	}
 	
@@ -73,7 +74,7 @@ public class CustomerController {
 	}
 	
 	//elimina cliente
-	@RequestMapping(value="/form/{id}")
+	@RequestMapping(value="/delete/{id}")
 	public String delete(@PathVariable(value="id") Long id) {
 		
 		//Si el id existe lo elimina

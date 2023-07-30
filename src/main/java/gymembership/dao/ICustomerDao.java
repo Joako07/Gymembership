@@ -1,16 +1,10 @@
 package gymembership.dao;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
 import gymembership.entities.Customer;
 
-public interface ICustomerDao {
+public interface ICustomerDao extends CrudRepository <Customer, Long>{
 	
-	public List<Customer> findAll();
-
-	public void save(Customer customer);
 	
-	public Customer findOne(Long id);
-	
-    public void delete(Long id);
 }
