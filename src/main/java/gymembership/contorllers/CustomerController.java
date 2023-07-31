@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import gymembership.entities.Customer;
 import gymembership.service.ICustomerService;
 import jakarta.validation.Valid;
 
 @Controller
+@SessionAttributes("customer") 
 public class CustomerController {
 	
 	@Autowired
@@ -36,7 +39,7 @@ public class CustomerController {
 			
 		Customer customer = new Customer();
 		model.put("customer", customer);
-		model.put("titel", "Formulario de Clientes");
+		model.put("title", "Formulario de Clientes");
 		return "form";
 		}
 	
@@ -61,15 +64,16 @@ public class CustomerController {
 	//Guarda un nuevo cliente
 	//pasar @Valid para que tome la validación y BindingResult para ver que no contenga errores
 	@PostMapping(value="/form")
-	public String save(@Valid Customer customer, BindingResult result, Model model) {
+	public String save(@Valid Customer customer, BindingResult result, Model model,SessionStatus status) {
 	
 		//Corroboro que no exista algún error. De ser así vuelve al formulario 
 		if(result.hasErrors()) {
-			model.addAttribute("titel", "Formulario de Clientes");
+			model.addAttribute("title", "Formulario de Clientes");
 			return "form";
 		}
 		
 		customerService.save(customer);
+		status.setComplete();
 		return "redirect:listar";
 	}
 	
