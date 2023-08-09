@@ -3,50 +3,63 @@
 <head th:replace="layout/layout :: head"></head>
 <body>
 
-<header th:replace ="layout/layout :: header"></header>
+	<header th:replace="layout/layout :: header"></header>
 
-	<h1 class="text-primary border border-success border-top-0 border-left-0 border-right-0" th:text="${title}"></h1>
 
-<a th:href="@{/form}">Crear Cliente</a>
-<div class="container">
-	<table>
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>name</th>
-				<th>surname</th>
-				<th>email</th>
-				<th>birthdate</th>
-				<th>createAt</th>
-				<!--  
+
+	<a th:href="@{/form}">Crear Cliente</a>
+	<div class="container py-4">
+
+		<div class="card">
+			<div class="card-header">
+				<h1 th:text="${title}"
+					class="text-primary border border-success border-top-0 border-left-0 border-right-0"></h1>
+
+			</div>
+			<div class="card-body">
+				<table>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>name</th>
+							<th>surname</th>
+							<th>email</th>
+							<th>birthdate</th>
+							<th>createAt</th>
+							<!--  
 				<th>picture</th>
 				<th>membership</th>
 				-->
-				<th>editar</th>
-				<th>eliminar</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="customer: ${customers}">
-				<td th:text="${customer.id}"></td>
-				<td th:text="${customer.name}"></td>
-				<td th:text="${customer.surname}"></td>
-				<td th:text="${customer.email}"></td>
-				<td th:text="${customer.birthdate}"></td>
-				<td th:text="${customer.createAt}"></td>
-				<!-- 
+							<th>editar</th>
+							<th>eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="customer: ${customers}">
+							<td th:text="${customer.id}"></td>
+							<td th:text="${customer.name}"></td>
+							<td th:text="${customer.surname}"></td>
+							<td th:text="${customer.email}"></td>
+							<td th:text="${customer.birthdate}"></td>
+							<td th:text="${customer.createAt}"></td>
+							<!-- 
 				<td th:text="${customer.picture}"></td>
 				<td th:text="${customer.membership}"></td>
 				 -->
-				 <td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${customer.id}" th:text="'editar'"></a></td>
-				 <!-- Oneclick es codigo js, pregunto si quiere eliminar el cliente antes de eliminarlo -->
-				 <td><a class="btn btn-danger btn-xs"  th:href="@{/delete/} + ${customer.id}" th:text="'eliminar'" onclick="return confirm('¿Estás seguro que quieres eliminar este cliente?');"></a></td>
-			</tr>
-		</tbody>
-	</table>
-</div>	
-	
-<footer th:replace="layout/layout :: footer"></footer>
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/form/} + ${customer.id}" th:text="'editar'"></a></td>
+							<!-- Oneclick es codigo js, pregunto si quiere eliminar el cliente antes de eliminarlo -->
+							<td><a class="btn btn-danger btn-xs"
+								th:href="@{/delete/} + ${customer.id}" th:text="'eliminar'"
+								onclick="return confirm('¿Estás seguro que quieres eliminar este cliente?');"></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
 
 </body>
 </html>
